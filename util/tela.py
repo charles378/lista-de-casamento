@@ -1,4 +1,5 @@
 import flet as ft
+from validador_senha import valiador_senhas
 
 
 def  maini(page: ft.Page):
@@ -22,7 +23,7 @@ def  maini(page: ft.Page):
             #butao minha lista so quem ten asseso e o casal eo butao do convidado aulado
             ft.Container(
                 
-                content=ft.Row([ft.TextButton('Minha lista',on_click=lambda _: page.go('/store')), 
+                content=ft.Row([ft.TextButton('Minha lista', on_click=lambda _: page.go('/validador_senha')), 
                                 ft.TextButton('Convidado')],
                                 alignment=ft.alignment.center, 
                                 width=200,),             

@@ -2,14 +2,10 @@ import flet as ft
 from home import Home
 from store import Store
 from tela import maini
+from validador_senha import valiador_senhas
 
 
 def main(page: ft.Page):
-    page.appbar = ft.AppBar(
-                    title=ft.Text('Lista de casamento'),
-                    center_title=True,
-                    bgcolor=ft.colors.BLUE
-                ),
     
     def route_change(route):
         page.views.clear()
