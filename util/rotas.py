@@ -1,8 +1,6 @@
 import flet as ft
 from home import Home
 from store import Store
-from tela import maini
-from util.validador_senhaaaaa import valiador_senhas
 
 
 def main(page: ft.Page):
