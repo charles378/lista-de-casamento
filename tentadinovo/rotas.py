@@ -1,9 +1,13 @@
 import flet as ft
 from home import Home
-from store import Store
+from validador_sanha import validador
+#from store import Store
 
 
 def main(page: ft.Page):
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.theme_mode = ft.ThemeMode.DARK
     
     def route_change(route):
         page.views.clear()
@@ -18,9 +22,12 @@ def main(page: ft.Page):
                 controls=[Home(page)],)
         )
 
-        if page.route == "/store":
+        if page.route == "/validador_sanha":
             page.views.append(
-                ft.View(route="/store", controls=[Store(page)])
+                ft.View(route="/validador_sanha", 
+                        controls=[validador(page)],
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                        )
             )
         page.update()
 
