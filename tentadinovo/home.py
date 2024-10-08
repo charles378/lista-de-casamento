@@ -9,6 +9,9 @@ def Home(page: ft.Page):
         height=240,
         width=180
     )
+
+    
+
     botao = ft.Row([ft.ElevatedButton('Criar lista'), ft.ElevatedButton('convidador')],)
     return ft.Container(
         alignment=ft.alignment.center,
@@ -17,7 +20,7 @@ def Home(page: ft.Page):
             avatar,
             ft.Container(
                 content=ft.Row([ft.TextButton('Minha lista', on_click=lambda _: page.go('/validador_sanha')), 
-                                ft.TextButton('Convidado')],
+                                ft.TextButton('Convidado', on_click=lambda _: page.go('/validador_sanha'))],
                                 alignment=ft.alignment.center, 
                                 width=200,),             
                 alignment=ft.alignment.center,
