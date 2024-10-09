@@ -4,7 +4,7 @@ import flet as ft
 def Home(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.theme_mode = ft.ThemeMode.DARK
+    page.theme_mode = ft.ThemeMode.SYSTEM
 
     avatar = ft.CircleAvatar(
         col=3,  # cantida de coluna que vai o cupar
@@ -13,14 +13,32 @@ def Home(page: ft.Page):
         width=180
     )
 
-    carosel = ft.ResponsiveRow(
+    data_falta = ft.Container(
+        content=ft.Text('Falta tantos dias e 00.00.00 segundos')
+    )
+
+    def expand_image(e):
+        for c in carousel.controls:
+            c.col=1
+
+        e.control.col = 12 - len(carousel.controls) + 1
+        carousel.update()
+
+    carousel = ft.ResponsiveRow(
+        columns=12,
+        spacing=5,
         controls=[
             ft.Container(
-                image_src=f'htpps://picsum.photos/250/300?10'
-                
-            )
+                col=1,
+                image_src=f'https://picsum.photos/250/300?{num}',
+                image_fit=ft.ImageFit.COVER,
+                border_radius=ft.border_radius.all(5),
+                on_click=expand_image
+            ) for num in range(10, 18)
         ]
     )
+
+    carousel.controls[0].col = 12 - len(carousel.controls) + 1
 
     tela_foto = ft.Container(
         width=700,
@@ -28,12 +46,13 @@ def Home(page: ft.Page):
         shadow=ft.BoxShadow(blur_radius=500),
         bgcolor=ft.colors.GREY_200,
         border_radius=ft.border_radius.all(10),
-        content=carosel,
+        padding=ft.padding.all(5),
+        content=carousel,
     )
 
     botao = ft.Row([
         ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/validador_sanha')), 
-        ft.ElevatedButton('convidador', on_click=lambda _: page.go('/validador_sanha'))],
+        ft.ElevatedButton('convidador', on_click=lambda _: page.go('/casal'))],
         alignment=ft.alignment.center, 
         )
     
@@ -42,6 +61,7 @@ def Home(page: ft.Page):
         content=ft.Column([
             #foto
             avatar,
+            data_falta,
             ft.Container(
                 content=botao,             
                 alignment=ft.alignment.center,
@@ -54,8 +74,3 @@ def Home(page: ft.Page):
            alignment=ft.alignment.center
         )
     )
-
-'''ft.Row([ft.TextButton('Minha lista', on_click=lambda _: page.go('/validador_sanha')), 
-           ft.TextButton('Convidado', on_click=lambda _: page.go('/validador_sanha'))],
-                                alignment=ft.alignment.center, 
-                                width=200,)'''

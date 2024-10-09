@@ -15,6 +15,7 @@ def validador(page: ft.Page):
  
         if username == "admin" and password == "12345":
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
+            
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
  

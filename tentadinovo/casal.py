@@ -6,8 +6,8 @@ class ToDo:
     def __init__(self, page: ft.Page):
         self.page = page
         self.page.bgcolor =ft.colors.BLACK
-        self.page.window_width = 350
-        self.page.window_height=450
+        #self.page.window_width = 350
+        #self.page.window_height=450
         self.page.window_resizable=False
         self.page.window_always_on_top=True
         self.page.title='Controle de lista do casal'
@@ -118,6 +118,7 @@ class ToDo:
 
         tasks = self.tasks_container() # aqui e para atribuir a funcao a uma variavel
 
-        self.page.add(input_bar, tabs, tasks)
+        return self.page.add(input_bar, tabs, tasks)
+        
 
 ft.app(ToDo)
