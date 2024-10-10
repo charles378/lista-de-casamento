@@ -13,12 +13,8 @@ def validador(page: ft.Page):
         # Aqui você pode manipular os dados, como autenticação ou exibir mensagem
         print(f"Username: {username}, Password: {password}")
  
-        if username == "admin" and password == "12345" in "123456":
+        if username == "admin" and password == "12345":
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
-            if password == "12345":
-                return page.go('/covidado')
-            else:
-                return page.go('/convidado')
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
  
@@ -52,7 +48,8 @@ def validador(page: ft.Page):
     )
  
     # Adicionando o container à página
-    return login_container
+    page.add(login_container)
+    #return login_container
  
 # Executa o app
-#ft.app(target=main)
+ft.app(target=validador)

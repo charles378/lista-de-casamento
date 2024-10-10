@@ -88,8 +88,7 @@ def main(page: ft.Page):
                         ft.CircleAvatar(content=ft.Text('PA')),  # para colocar o avatar do usuario
                     ]
                 ),  
-                        controls=[Precente(page)],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                        controls=[Precente(page)]
                         )
             )
         page.update()
