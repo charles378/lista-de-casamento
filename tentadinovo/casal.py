@@ -121,4 +121,4 @@ class ToDo:
         return self.page.add(input_bar, tabs, tasks)
         
 
-ft.app(ToDo)
+#ft.app(ToDo)
