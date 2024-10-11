@@ -3,6 +3,7 @@ from home import Home
 from validador_sanha import validador
 from casal import ToDo
 from convidado import Precente
+from cadastro import cadastrar
 
 
 def main(page: ft.Page):
@@ -42,7 +43,8 @@ def main(page: ft.Page):
             page.views.append(
                 ft.View(route="/validador_sanha", 
                         controls=[validador(page)],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        vertical_alignment=ft.MainAxisAlignment.CENTER
                         )
             )
         if page.route == "/casal":
@@ -89,6 +91,26 @@ def main(page: ft.Page):
                     ]
                 ),  
                         controls=[Precente(page)]
+                        )
+            )
+        if page.route == "/cadastro":
+            page.views.append(
+                ft.View(route="/cadastro",
+                        appbar=ft.AppBar(
+                        title=ft.Text('Lista de presentes'),
+                        bgcolor=ft.colors.SURFACE_VARIANT,
+                        toolbar_height=100,  # a altura do aapBar
+                        color=ft.colors.AMBER,  # cor doa conponentes
+                        leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),  # para colocar o icom ou a sua logo usa o ft,Image()
+                        leading_width=100,  # espasso dos elementos entre eles
+                        actions=[  # para adisionar funçoes
+                            ft.IconButton(icon=ft.icons.SUNNY),
+                            ft.IconButton(icon=ft.icons.NOTIFICATIONS),
+                            ft.CircleAvatar(content=ft.Text('PA')),  # para colocar o avatar do usuario
+                        ]
+                    ),  
+                        controls=[cadastrar(page)],
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
                         )
             )
         page.update()

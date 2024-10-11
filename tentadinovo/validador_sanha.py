@@ -27,7 +27,7 @@ def validador(page: ft.Page):
     password_field = ft.TextField(label="Senha", password=True)
  
     # Botão de login
-    login_button = ft.Row([ft.ElevatedButton('Canselar', on_click=lambda _: page.go('/')),
+    login_button = ft.Row([ft.ElevatedButton('Cadastra', on_click=lambda _: page.go('/cadastro')),
                            ft.ElevatedButton(text="Login", on_click=on_login_click), 
                            ])
  
