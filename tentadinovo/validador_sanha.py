@@ -19,7 +19,7 @@ def validador(page: ft.Page):
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
  
-        open(info)
+        page.open(info)
         page.update()
  
     # Campos de entrada de dados (usuário e senha)
