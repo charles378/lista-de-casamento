@@ -118,7 +118,7 @@ class Precente:
 
         tasks = self.tasks_container() # aqui e para atribuir a funcao a uma variavel
 
-        return self.page.add(tabs, tasks)
+        self.page.add(tabs, tasks)
         
 
 #ft.app(Precente)

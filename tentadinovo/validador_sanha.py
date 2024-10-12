@@ -1,4 +1,5 @@
 import flet as ft
+from time import sleep
  
 def validador(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -15,11 +16,13 @@ def validador(page: ft.Page):
  
         if username == "admin" and password == "12345":
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
+            page.open(info)
+            sleep(1)
             return page.go('/')
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
  
-        page.open(info)
+            page.open(info)
         page.update()
  
     # Campos de entrada de dados (usuário e senha)

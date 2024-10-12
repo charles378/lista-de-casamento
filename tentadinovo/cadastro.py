@@ -27,4 +27,4 @@ def cadastrar(page: ft.Page):
     #page.add(leate)
 
 
-ft.app(cadastrar)
+#ft.app(cadastrar)

@@ -118,7 +118,7 @@ class ToDo:
 
         tasks = self.tasks_container() # aqui e para atribuir a funcao a uma variavel
 
-        return self.page.add(input_bar, tabs, tasks)
+        self.page.add(input_bar, tabs, tasks)
         
 
 #ft.app(ToDo)
