@@ -18,7 +18,7 @@ def validador(page: ft.Page):
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
             page.open(info)
             sleep(1)
-            return page.go('/')
+            return page.go('/casal')
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
  
@@ -33,8 +33,6 @@ def validador(page: ft.Page):
     login_button = ft.Row([ft.ElevatedButton('Cadastra', on_click=lambda _: page.go('/cadastro')),
                            ft.ElevatedButton(text="Login", on_click=on_login_click), 
                            ], alignment=ft.MainAxisAlignment.END)
-    
-    btn = ft.Row([ft.IconButton(ft.icons.CLOSE,)],alignment=ft.MainAxisAlignment.END, width=10, )
  
     # Container para agrupar os campos e o botão
     login_container = ft.Container(

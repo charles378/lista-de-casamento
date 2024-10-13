@@ -12,12 +12,15 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.SYSTEM
 
     def click(e):
-        j = e.control.selected = not e.control.selected
-        if j == True:
-            page.bgcolor = ft.colors.DARK
+        #e.control.selected = not e.control.selected
+        j = e.control.selected 
+        if j == False:
+            e.control.selected = not e.control.selected
+            page.window_bgcolor = ft.colors.BLACK
             e.control.update()
         else:
-            page.theme_mode = ft.ThemeMode.LIGHT
+            e.control.selected = not e.control.selected
+            page.window_bgcolor = ft.colors.WHITE
             e.control.update()
 
     
