@@ -10,11 +10,13 @@ def Home(page: ft.Page):
         col=3,  # cantida de coluna que vai o cupar
         foreground_image_url='https://www.naoviu.com.br/wp-content/uploads/2023/08/Spacex.jpg',
         height=240,
-        width=180
+        width=180,
+        offset=ft.Offset(x=1.5, y=-0.1)
     )
 
     data_falta = ft.Container(
-        content=ft.Text('Falta tantos dias e 00.00.00 segundos')
+        content=ft.Text('Falta tantos dias e 00.00.00 segundos'),
+        offset=ft.Offset(x=1, y=-2),
     )
 
     def expand_image(e):
@@ -53,7 +55,7 @@ def Home(page: ft.Page):
     botao = ft.Row([
         ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/validador_sanha')), 
         ft.ElevatedButton('convidador', on_click=lambda _: page.go('/convidado'))],
-        alignment=ft.alignment.center, 
+        alignment=ft.alignment.center,
         )
     
     return ft.Container(
@@ -68,9 +70,10 @@ def Home(page: ft.Page):
                 width=250,
                 bgcolor=ft.colors.WHITE12,
                 border_radius=50,
+                offset=ft.Offset(x=0.9, y=-0.5)
               ),
             tela_foto
            ],
-           alignment=ft.alignment.center
+           alignment=ft.alignment.center,
         )
     )

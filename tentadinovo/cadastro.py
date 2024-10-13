@@ -2,13 +2,14 @@ import flet as ft
 
 
 def cadastrar(page: ft.Page):
+    
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     nome_conv = ft.TextField(label='Nome')
     telefone_conv = ft.TextField(label='Telefone')
     senha_conv = ft.TextField(label='criar senha')
 
-    btn_botao = ft.Row(controls=[ft.ElevatedButton('Salvar'),ft.TextButton(text='Canselar', style=ft.ButtonStyle(color=ft.colors.RED))])
+    btn_botao = ft.Row(controls=[ft.ElevatedButton('Salvar'),ft.TextButton(text='Canselar', style=ft.ButtonStyle(color=ft.colors.RED), on_click=lambda _: page.go('/convidado'))])
 
     leate = ft.Container(
         content=ft.Column(

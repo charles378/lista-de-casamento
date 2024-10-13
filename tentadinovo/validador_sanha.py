@@ -32,12 +32,15 @@ def validador(page: ft.Page):
     # Botão de login
     login_button = ft.Row([ft.ElevatedButton('Cadastra', on_click=lambda _: page.go('/cadastro')),
                            ft.ElevatedButton(text="Login", on_click=on_login_click), 
-                           ])
+                           ], alignment=ft.MainAxisAlignment.END)
+    
+    btn = ft.Row([ft.IconButton(ft.icons.CLOSE,)],alignment=ft.MainAxisAlignment.END, width=10, )
  
     # Container para agrupar os campos e o botão
     login_container = ft.Container(
         content=ft.Column(
             controls=[
+                
                 ft.Text("Tela de Login", theme_style="headlineMedium"),
                 username_field,
                 password_field,
