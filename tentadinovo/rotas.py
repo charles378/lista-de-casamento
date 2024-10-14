@@ -19,7 +19,7 @@ def main(page: ft.Page):
             page.window_bgcolor = ft.colors.BLACK
             e.control.update()
         else:
-            e.control.selected = not e.control.selected
+            e.control.selected = not e.control.selected2
             page.window_bgcolor = ft.colors.WHITE
             e.control.update()
 
@@ -101,7 +101,7 @@ def main(page: ft.Page):
                                 )
                             ]
                         ),  
-                        controls=[ToDo(page)],
+                        controls=[ToDo.main_page(page)],
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER
                         )
             )

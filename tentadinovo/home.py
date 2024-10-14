@@ -54,7 +54,7 @@ def Home(page: ft.Page):
 
     botao = ft.Row([
         ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/validador_sanha')), 
-        ft.ElevatedButton('convidador', on_click=lambda _: page.go('/validador_sanha'))],
+        ft.ElevatedButton('convidador', on_click=lambda _: page.go('/casal'))],
         alignment=ft.alignment.center,
         )
     
