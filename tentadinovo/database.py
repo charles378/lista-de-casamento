@@ -7,12 +7,12 @@ db = SqliteDatabase('freelancers.db')
 class Usuario(Model):
     # o propio peewee jera o seu propio id mas se quer comlocar e primary_key+True
     nome = CharField()  # CharField() ele tem um limite de 255 caraquiteres
+    telefone = CharField()
     email = CharField(unique=True)  # para nao repeti email na tablela
     senha = CharField()
 
     class Meta:  # para que o peewee saber qual banco de dado ele vai conversa
         database = db
-
 
 # essa e a tablela do anuncio
 class Anuncio(Model):  # backref='usuarios' e para criar a referenca

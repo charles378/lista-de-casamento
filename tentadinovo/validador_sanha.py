@@ -21,7 +21,6 @@ def validador(page: ft.Page):
             return page.go('/casal')
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
- 
             page.open(info)
         page.update()
  
@@ -53,8 +52,8 @@ def validador(page: ft.Page):
     )
  
     # Adicionando o container à página
-    #page.add(login_container)
-    return login_container
+    page.add(login_container)
+    #return login_container
  
 # Executa o app
-#ft.app(target=validador)
+ft.app(target=validador)
