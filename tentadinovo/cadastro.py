@@ -49,8 +49,8 @@ def cadastrar(page: ft.Page):
         width=700,
         padding=50
     )
-    #return leate
-    page.add(leate)
+    return leate
+    #page.add(leate)
 
 
-ft.app(cadastrar)
+#ft.app(cadastrar)

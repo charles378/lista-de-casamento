@@ -121,4 +121,4 @@ class Precente:
         self.page.add(tabs, tasks)
         
 
-#ft.app(Precente)
+ft.app(Precente)

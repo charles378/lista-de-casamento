@@ -24,3 +24,12 @@ class Anuncio(Model):  # backref='usuarios' e para criar a referenca
     class Meta:
         database = db
         
+class Item(Model):  # backref='usuarios' e para criar a referenca
+    nome = CharField()  # para cliar areferencia com a tabela usuari que id
+    #marca = CharField()  # CharField() ele tem um limite de 255 caraquiteres
+   # descricao = TextField()  # TextField() ele nao tem um limite de caraquiteres
+    #status = CharField()  # vai reseber um numero decimal
+
+    class Meta:
+        database = db
+        
