@@ -51,17 +51,17 @@ def Home(page: ft.Page):
         padding=ft.padding.all(5),
         content=carousel,
     )
+    
 
     botao = ft.Row([
-        ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/convidado')), 
-        ft.ElevatedButton('convidador', on_click=lambda _: page.go('/casal'))],
+        ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/casal1')), 
+        ft.ElevatedButton('convidador', on_click=lambda _: page.go('/covidado1'))],
         alignment=ft.alignment.center,
         )
     
     return ft.Container(
         alignment=ft.alignment.center,
         content=ft.Column([
-            #foto
             avatar,
             data_falta,
             ft.Container(

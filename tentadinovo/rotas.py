@@ -101,7 +101,7 @@ def main(page: ft.Page):
                                 )
                             ]
                         ),  
-                        controls=[ToDo.main_page(page)],
+                        controls=[ToDo(page)],
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER
                         )
             )

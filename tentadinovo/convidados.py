@@ -1,75 +1,90 @@
 import flet as ft
-from database import db, Item
+import sqlite3
 
-db.connect()  # para fazer a chamada da ação
+def main(page: ft.Page):
+    page.bgcolor = ft.colors.BLACK
+    page.window_resizable = False
+    page.window_always_on_top = True
+    page.title = 'Controle de lista do casal'
+    task = ''
+    view = 'all'
+    db_execute('CREATE TABLE IF NOT EXISTS TASKS(name, status)')
+    results = db_execute('SELECT * FROM tasks')
 
-db.create_tables([Item])  # para criar a tablela caso ela nao exista e criar uma lista [Usuario, Anuncio]
+    def db_execute(query, params=[]):
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
+            cur.execute(query, params)
+            con.commit()
+            return cur.fetchall()
 
+    def checked(e, view, update_task_list):
+        is_checked = e.control.value
+        label = e.control.label
 
-def casal(page: ft.Page):
-    global task 
-    
-    def update_task_list(): # para atualiza a lista
-        #tasks = tasks_container()
-        tasks = Item.select()
-        for u in tasks:
-            page.controls.pop() # para sobre escrever o utino tasks_container da pagena
-            page.add(u) # adicionando a nova tasks_container na pagina
-        page.update()# para altoalizar a pagina
+        if is_checked:
+            db_execute('UPDATE tasks SET status = "complete" WHERE name = ?', params=[label])
+        else:
+            db_execute('UPDATE tasks SET status = "incomplete" WHERE name = ?', params=[label])
+
+        if view == 'all':
+            results = db_execute('SELECT * FROM tasks')
+        else:
+            results = db_execute('SELECT * from tasks WHERE status = ?', params=[view])
+
+        update_task_list(results)
+
+    def tasks_container(page, results):
+        return ft.Container(
+            height=page.height * 0.8,
+            content=ft.Column(
+                controls=[
+                    ft.Checkbox(label=res[0], 
+                                on_change=lambda e: checked(e, view, update_task_list),
+                                value=True if res[1] == 'complete' else False)
+                    for res in results if res
+                ]
+            )
+        )
 
     def set_value(e):
-        global task
-        task = e.control.value # para pegar o valor do input so que preciso criar essa variavel na minha crass
+        return e.control.value
 
-    def add(e, input_task):
-        nome = task # pegando o valor e salvando na variavel
-        status = 'incomplete' # senpre sera salve o estatus como inconpreto
+    def add(e, input_task, task, update_task_list):
+        nome = task
+        status = 'incomplete'
 
         if nome:
-            Item.create(nome=nome, status=status) # para inserio o valori no banco de dados
-            input_task.value = '' # para linpar o canpo de texto toda ves que salvar \
-            results = Item.select()# para selecionar tudo que esta no bonco de dados
-            update_task_list() # para atualiza a lista
+            db_execute(query='INSERT INTO tasks VALUES(?,?)', params=[nome, status])
+            input_task.value = ''
+            results = db_execute('SELECT * FROM tasks')
+            update_task_list(results)
 
-    def tabs_changed(e):
-        pass
-        # if e.control.selected_index == 0:
-        #     self.results = self.db_execute('SELECT * FROM tasks')
-        #     self.view = 'all'
-        # elif e.control.selected_index == 1:
-        #     self.results = self.db_execute('SELECT * FROM tasks WHERE status = "incomplete"')
-        #     self.view = 'incomplete'
-        # elif e.control.selected_index == 2:
-        #     self.results = self.db_execute('SELECT * FROM tasks WHERE status = "complete"')
-        #     self.view = 'complete'
+    def update_task_list(page, results):
+        tasks = tasks_container(page, results)
+        page.controls.pop()
+        page.add(tasks)
+        page.update()
 
-        # self.update_task_list()
+    def tabs_changed(e, update_task_list, view):
+        if e.control.selected_index == 0:
+            results = db_execute('SELECT * FROM tasks')
+            view = 'all'
+        elif e.control.selected_index == 1:
+            results = db_execute('SELECT * FROM tasks WHERE status = "incomplete"')
+            view = 'incomplete'
+        update_task_list(results)
 
-    input_task = ft.TextField(
-            hint_text='Digite um Item', # o hint_text serve para sumir o testo de ajuda
-            expand=True, # o expand e para dimesiomar
-            on_change=set_value # para chama a funcao set_value que capitura os dados digitado
-        ) 
-    
-    input_bar = ft.Row(
-            controls=[
-                input_task,
-                ft.FloatingActionButton(
-                    icon=ft.icons.ADD,
-                    on_click=lambda e: add(e, input_task) # para chamar a funcao add e passa um evento e o input_task
-                )
-            ]
-        )
-    tabs = ft.Tabs(
-                selected_index=0, # para fixa no primeiro texto
-                on_change=tabs_changed,
-                tabs=[
-                    ft.Tab(text='Todos'),
-                    ft.Tab(text='Em andamento'),
-                    ft.Tab(text='Finalizados')
-                ]
-        )
-    page.add(input_bar, tabs)
-    
+    def update_task_list(results):
+            tasks = tasks_container(page, results)
+            page.controls.pop()
+            page.add(tasks)
+            page.update()
 
-ft.app(casal)
+            page.add(ft.TextField(on_change=lambda e: set_value(e)))
+            page.add(ft.Button(text="Add", on_click=lambda e: add(e, input_task, task, update_task_list)))
+            page.add(ft.Tabs(on_change=lambda e: tabs_changed(e, update_task_list)))
+
+            update_task_list(results)
+
+ft.app(target=main)
