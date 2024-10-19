@@ -139,6 +139,20 @@ def main(page: ft.Page):
         cliente.delete_instance()
         carregar_clientes()
 
+    def imprimir_clientes(e):
+        clientes = Cliente.select()
+        for cliente in clientes:
+             print(f"ID: {cliente.id}, Nome: {cliente.nome}, Email: {cliente.email}")
+        ft.Container(
+            height=page.height * 0.8, # para defini o tamanho que vai 80% da pagina
+            content= ft.Column(
+                controls=[
+                     
+                    ft.Text(f'ID: {cliente.id}, Nome: {cliente.nome}, Email: {cliente.email}')for cliente in clientes
+                ]
+            )
+        )
+
     def carregar_clientes():
         clientes = Cliente.select()
         clientes_list.controls.clear()
@@ -152,7 +166,7 @@ def main(page: ft.Page):
     adicionar_button = ft.ElevatedButton(text="Adicionar", on_click=adicionar_cliente)
     modificar_button = ft.ElevatedButton(text="Modificar", on_click=modificar_cliente)
     deletar_button = ft.ElevatedButton(text="Deletar", on_click=deletar_cliente)
-    clientes_list = ft.Column()
+    clientes_list = ft.Row()
 
     page.add(
         ft.Tabs(
@@ -170,7 +184,8 @@ def main(page: ft.Page):
                 ft.Tab(
                     text="Clientes",
                     content=ft.Column([
-                        ft.Text("Clientes:"),
+                         ft.Row(controls=[ft.Text('ID',expand=True), ft.Text('Nome',expand=True), ft.Text('E-mail',expand=True),]),
+                       
                         clientes_list
                     ])
                 )
