@@ -98,18 +98,18 @@ def main(page: ft.Page):
                                 controls=[
                                     ft.ListTile(
                                         title=ft.Text(produto.nome),
-                                        subtitle=ft.Text(f"{produto.marca} - {produto.descricao} - Estoque: {produto.estoque}"),
+                                        subtitle=ft.Text(f"{produto.marca} - {produto.descricao} - Estoque: {produto.estoque}", expand=True),
                                         trailing=ft.Row(
                                             controls=[
                                                 ft.IconButton(
                                                     icon=ft.icons.SHOPPING_CART,
-                                                    on_click=lambda e, produto_id=produto.id: comprar_produto(produto_id)
+                                                    on_click=lambda e, produto_id=produto.id: comprar_produto(produto_id), 
                                                 ),
                                                 ft.IconButton(
                                                     icon=ft.icons.DELETE,
                                                     on_click=lambda e, produto_id=produto.id: delete_produto(produto_id)
                                                 )
-                                            ]
+                                            ], scroll=True
                                         )
                                     ) for produto in Produto.select()
                                 ]
