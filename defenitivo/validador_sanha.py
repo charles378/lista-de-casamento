@@ -18,7 +18,7 @@ def validador(page: ft.Page):
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
             page.open(info)
             sleep(1)
-            return page.go('/casal')
+            return page.go('/convidado')
         else:
             info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
             page.open(info)

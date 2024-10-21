@@ -2,18 +2,8 @@ import flet as ft
 from databaze import Convidado, Presente
 
 
-def casall(page: ft.Page):
+def Convidador(page: ft.Page):
 
-    def adicionar_presente(e):
-        nome = nome_presente.value
-        marca = marca_presente.value
-        cor = cor_presente.value
-        if nome and marca and cor:
-            Presente.create(nome=nome, marca=marca, cor=cor)
-            nome_presente.value = ""
-            marca_presente.value = ""
-            cor_presente.value = ""
-            caregar_presente()
     
     def delete_cliente(convidado_id):
         cliente = Convidado.get(Convidado.id == convidado_id)
@@ -47,11 +37,8 @@ def casall(page: ft.Page):
                 on_change=lambda e, id=presente.id: marcar_comprado(e, id),
                 label_style=ft.TextStyle(color=ft.colors.AMBER)
             )
-            delete_button = ft.IconButton(
-                icon=ft.icons.DELETE,
-                on_click=lambda e, id=presente.id: deletar_presente(e, id)
-            )
-            todos_list.controls.append(ft.Row([checkbox, delete_button],scroll=True))
+            
+            todos_list.controls.append(ft.Row([checkbox],scroll=True))
 
         for presente in concluidos_presentes:
             checkbox = ft.Checkbox(
@@ -60,11 +47,8 @@ def casall(page: ft.Page):
                 on_change=lambda e, id=presente.id: marcar_comprado(e, id),
                 check_color=ft.colors.AMBER_200
             )
-            delete_button = ft.IconButton(
-                icon=ft.icons.DELETE,
-                on_click=lambda e, id=presente.id: deletar_presente(e, id)
-            )
-            concluidos_list.controls.append(ft.Row([checkbox, delete_button],scroll=True))
+            
+            concluidos_list.controls.append(ft.Row([checkbox],scroll=True))
 
         for presente in incompletos_presentes:
             checkbox = ft.Checkbox(
@@ -72,35 +56,20 @@ def casall(page: ft.Page):
                 value=presente.compra,
                 on_change=lambda e, id=presente.id: marcar_comprado(e, id)
             )
-            delete_button = ft.IconButton(
-                icon=ft.icons.DELETE,
-               on_click=lambda e, id=presente.id: deletar_presente(e, id)
-            )
-            incompletos_list.controls.append(ft.Row([checkbox, delete_button],scroll=True))
+            
+            incompletos_list.controls.append(ft.Row([checkbox],scroll=True))
 
         page.update()
 
 
-    nome_presente = ft.TextField(label='Nome')
-    marca_presente = ft.TextField(label='Marca', expand=True,)
-    cor_presente = ft.TextField(label='cor')
-    adicionar_button = ft.ElevatedButton(text="Adicionar", on_click=adicionar_presente)
 
-    titulo = ft.Text('Cadastra Presentes',  size=30, color= ft.colors.AMBER)
+
+    titulo = ft.Text('Lista de Presentes',  size=30, color= ft.colors.AMBER)
 
     todos_list = ft.Column(scroll=True)
     concluidos_list = ft.Column(scroll=True)
     incompletos_list = ft.Column(scroll=True)
 
-    butan = ft.Row(
-        controls=[
-            marca_presente,
-            ft.FloatingActionButton(
-                icon=ft.icons.ADD,
-                on_click=adicionar_presente
-            )
-        ]
-    )
 
     tabs = ft.Tabs(
         selected_index=0,
@@ -127,7 +96,7 @@ def casall(page: ft.Page):
                     ],scroll=True)
                 ),
             ft.Tab(
-                text='Lista de convidados',
+                text='Presente selecionado',
                 content=ft.Column(
                     scroll=True,
                     controls=[
@@ -141,7 +110,7 @@ def casall(page: ft.Page):
                                         on_click=lambda e, convidado_id=convidado.id: delete_cliente(convidado_id)
                                     )
                                 ) for convidado in Convidado.select()
-                            ]
+                            ],on_scroll=True
                         )
                     ]
                 )
@@ -150,9 +119,9 @@ def casall(page: ft.Page):
         ]
     )
 
-    #page.add(titulo,nome_presente, cor_presente, butan, tabs)
+    # page.add(titulo, tabs)
     caregar_presente()
-    return titulo,nome_presente, cor_presente, butan, tabs
+    return titulo, tabs
 
 
-#ft.app(casall)
+#ft.app(Convidador)

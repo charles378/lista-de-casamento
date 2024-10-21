@@ -1,8 +1,8 @@
 import flet as ft
 from home import Home
 from validador_sanha import validador
-from casal import ToDo
-from convidado import Precente
+from casal import casall
+from convidado import Convidador
 from cadastro import cadastrar
 
 
@@ -101,7 +101,7 @@ def main(page: ft.Page):
                                 )
                             ]
                         ),  
-                        controls=[ToDo(page)],
+                        controls=[casall(page)],
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER
                         )
             )
@@ -121,7 +121,7 @@ def main(page: ft.Page):
                         ft.CircleAvatar(content=ft.Text('PA')),  # para colocar o avatar do usuario
                     ]
                 ),  
-                        controls=[Precente(page)]
+                        controls=[Convidador(page)]
                         )
             )
         if page.route == "/cadastro":
