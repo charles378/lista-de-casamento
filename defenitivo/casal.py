@@ -1,7 +1,6 @@
 import flet as ft
 from databaze import Convidado, Presente
 
-
 def casall(page: ft.Page):
 
     def adicionar_presente(e):
@@ -51,7 +50,7 @@ def casall(page: ft.Page):
                 icon=ft.icons.DELETE,
                 on_click=lambda e, id=presente.id: deletar_presente(e, id)
             )
-            todos_list.controls.append(ft.Row([checkbox, delete_button],scroll=True))
+            todos_list.controls.append(ft.Row([checkbox, delete_button], scroll=True))
 
         for presente in concluidos_presentes:
             checkbox = ft.Checkbox(
@@ -64,7 +63,7 @@ def casall(page: ft.Page):
                 icon=ft.icons.DELETE,
                 on_click=lambda e, id=presente.id: deletar_presente(e, id)
             )
-            concluidos_list.controls.append(ft.Row([checkbox, delete_button],scroll=True))
+            concluidos_list.controls.append(ft.Row([checkbox, delete_button], scroll=True))
 
         for presente in incompletos_presentes:
             checkbox = ft.Checkbox(
@@ -74,19 +73,18 @@ def casall(page: ft.Page):
             )
             delete_button = ft.IconButton(
                 icon=ft.icons.DELETE,
-               on_click=lambda e, id=presente.id: deletar_presente(e, id)
+                on_click=lambda e, id=presente.id: deletar_presente(e, id)
             )
-            incompletos_list.controls.append(ft.Row([checkbox, delete_button],scroll=True))
+            incompletos_list.controls.append(ft.Row([checkbox, delete_button], scroll=True))
 
         page.update()
 
-
     nome_presente = ft.TextField(label='Nome')
-    marca_presente = ft.TextField(label='Marca', expand=True,)
-    cor_presente = ft.TextField(label='cor')
+    marca_presente = ft.TextField(label='Marca', expand=True)
+    cor_presente = ft.TextField(label='Cor')
     adicionar_button = ft.ElevatedButton(text="Adicionar", on_click=adicionar_presente)
 
-    titulo = ft.Text('Cadastra Presentes',  size=30, color= ft.colors.AMBER)
+    titulo = ft.Text('Cadastra Presentes', size=30, color=ft.colors.AMBER)
 
     todos_list = ft.Column(scroll=True)
     concluidos_list = ft.Column(scroll=True)
@@ -106,26 +104,9 @@ def casall(page: ft.Page):
         selected_index=0,
         scrollable=True,
         tabs=[
-            ft.Tab(
-                text='todos',
-                content=ft.Column([
-                        ft.Text("Todos os Presentes:"),
-                        todos_list
-                    ],scroll=True)
-                   ),
-            ft.Tab(
-                text='Compreto',
-                content=ft.Column([
-                        ft.Text("Presentes Concluídos:"),
-                        concluidos_list],scroll=True)
-                ),
-            ft.Tab(
-                text='incompreto',
-                content=ft.Column([
-                        ft.Text("Presentes Incompletos:"),
-                        incompletos_list
-                    ],scroll=True)
-                ),
+            ft.Tab(text="Todos", content=todos_list),
+            ft.Tab(text="Concluídos", content=concluidos_list),
+            ft.Tab(text="Incompletos", content=incompletos_list),
             ft.Tab(
                 text='Lista de convidados',
                 content=ft.Column(
@@ -134,8 +115,8 @@ def casall(page: ft.Page):
                         ft.ListView(
                             controls=[
                                 ft.ListTile(
-                                    title=ft.Text(convidado.nome),
-                                    subtitle=ft.Text(f"{convidado.telefone} - {convidado.email}"),
+                                    title=ft.Text(f'{convidado.id} - {convidado.nome}'),
+                                    subtitle=ft.Text(f"       {convidado.telefone} - {convidado.email}"),
                                     trailing=ft.IconButton(
                                         icon=ft.icons.DELETE,
                                         on_click=lambda e, convidado_id=convidado.id: delete_cliente(convidado_id)
@@ -146,13 +127,35 @@ def casall(page: ft.Page):
                     ]
                 )
             )
-
         ]
     )
 
-    #page.add(titulo,nome_presente, cor_presente, butan, tabs)
+    # page.add(
+    #     ft.Column(
+    #         controls=[
+    #             titulo,
+    #             nome_presente,
+    #             marca_presente,
+    #             cor_presente,
+    #             adicionar_button,
+    #             tabs
+    #         ]
+    #     )
+    # )
+    
+
     caregar_presente()
-    return titulo,nome_presente, cor_presente, butan, tabs
+    return ft.Column(
+            controls=[
+                titulo,
+                nome_presente,
+                marca_presente,
+                cor_presente,
+                adicionar_button,
+                tabs
+            ]
+        )
 
 
-#ft.app(casall)
+# Inicie o aplicativo Flet
+#ft.app(target=casall)

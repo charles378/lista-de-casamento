@@ -3,7 +3,7 @@ from databaze import Convidado, Presente
 
 
 def Convidador(page: ft.Page):
-
+    page.bgcolor = ft.colors.WHITE
     
     def delete_cliente(convidado_id):
         cliente = Convidado.get(Convidado.id == convidado_id)
@@ -121,7 +121,12 @@ def Convidador(page: ft.Page):
 
     # page.add(titulo, tabs)
     caregar_presente()
-    return titulo, tabs
+    return ft.Column(
+            controls=[
+                titulo,
+                tabs
+            ]
+        )
 
 
 #ft.app(Convidador)
