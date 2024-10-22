@@ -341,7 +341,42 @@
 #     page.bgcolor = ft.colors.WHITE  # Cor inicial da página
 #     page.add(ft.Text("Conteúdo da página"))
 
+# # ft.app(target=main)
+# import flet as ft
+# from flet import FilePicker, FilePickerResultEvent
+
+# def main(page: ft.Page):
+#     def on_file_picked(e: FilePickerResultEvent):
+#         if e.files:
+#             avatar.foreground_image_src = e.files[0].path
+#             print(e.files[0].path)
+
+#             page.update()
+
+#     file_picker = FilePicker(on_result=on_file_picked)
+#     page.overlay.append(file_picker)
+
+#     avatar = ft.CircleAvatar(
+#         radius=300,
+#         foreground_image_src=""
+#     )
+
+#     def pick_image(e):
+#         file_picker.pick_files(allow_multiple=False)
+
+#     page.add(
+#         ft.Column(
+#             [
+#                 avatar,
+#                 ft.ElevatedButton("Escolher Imagem", on_click=pick_image),
+#             ],
+#             alignment=ft.MainAxisAlignment.CENTER,
+#             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+#         )
+#     )
+
 # ft.app(target=main)
+
 import flet as ft
 from flet import FilePicker, FilePickerResultEvent
 
@@ -350,7 +385,6 @@ def main(page: ft.Page):
         if e.files:
             avatar.foreground_image_src = e.files[0].path
             print(e.files[0].path)
-
             page.update()
 
     file_picker = FilePicker(on_result=on_file_picked)
@@ -376,5 +410,4 @@ def main(page: ft.Page):
     )
 
 ft.app(target=main)
-
 
