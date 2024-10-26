@@ -6,13 +6,20 @@ from convidado import Convidador
 from cadastro import cadastrar
 from databaze import Casal, Convidado
 from logintela import LoginPage
-from convi import Convidador
+#from convi import Convidador
 
 
 # Função fictícia para buscar o nome do usuário no banco de dados
-def get_user_name():
-    # Simulação de busca no banco de dados
-    return "Paulo Almeida"
+def get_user_name(page):
+    convidado_id = page.session.get("convidado_id")
+    print(f'{convidado_id} home')
+    if not convidado_id:
+        return None
+    
+    convidado = Convidado.get_or_none(Convidado.id == convidado_id)
+    if convidado:
+        return convidado.nome
+    return None
 
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -20,8 +27,11 @@ def main(page: ft.Page):
     #page.theme_mode = ft.ThemeMode.SYSTEM
     page.bgcolor = ft.colors.WHITE
 
-    user_name = get_user_name()
-    user_initials = "".join([name[0] for name in user_name.split()[:2]]).upper()
+    user_name = get_user_name(page)
+    if user_name:
+        user_initials = "".join([name[0] for name in user_name.split()[:2]]).upper()
+    else:
+        user_initials = "NN"  # Valor padrão caso o nome do usuário não seja encontrado
 
     def toggle_color(e):
         if page.bgcolor == ft.colors.BLACK:
@@ -32,12 +42,14 @@ def main(page: ft.Page):
 
     def show_user_data(e):
         # Função para buscar e mostrar os dados do usuário
-        user_data = get_user_name()  # Aqui você pode buscar mais dados do usuário
-        ft.dialog(title="Meu Dados", content=ft.Text(f"Nome: {user_data}")).show()
+        user_data = get_user_name(page)  # Aqui você pode buscar mais dados do usuário
+        ft.dialog(title="Meus Dados", content=ft.Text(f"Nome: {user_data}")).show()
 
     def logout(e):
-        # Função para sair e fechar a página
+        # Função para sair e limpar a sessão
         page.window.close()
+        page.session.remove("convidado_id")
+        
 
     
     def route_change(route):
@@ -71,10 +83,10 @@ def main(page: ft.Page):
                   controls=[Home(page)],scroll=True)
         )
 
-        if page.route == "/logintela":
+        if page.route == "/validador_sanha":
             page.views.append(
                 ft.View(
-                    route="/logintela", 
+                    route="/validador_sanha", 
                     appbar=ft.AppBar(
                     title=ft.Text('Tela de login'),
                     bgcolor=ft.colors.SURFACE_VARIANT,
@@ -98,7 +110,7 @@ def main(page: ft.Page):
                         )
                     ]
                 ) , 
-                    controls=[LoginPage(page)],
+                    controls=[validador(page)],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     vertical_alignment=ft.MainAxisAlignment.CENTER
                     )
@@ -133,9 +145,9 @@ def main(page: ft.Page):
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER, scroll=True
                         )
             )
-        if page.route == "/convi":
+        if page.route == "/convidado":
             page.views.append(
-                ft.View(route="/convi",
+                ft.View(route="/convidado",
                         appbar=ft.AppBar(
                         title=ft.Text('Lista de presentes'),
                         bgcolor=ft.colors.SURFACE_VARIANT,

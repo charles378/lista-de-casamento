@@ -1,4 +1,5 @@
 import flet as ft
+from databaze import Convidado
 from time import sleep
  
 def validador(page: ft.Page):
@@ -8,25 +9,38 @@ def validador(page: ft.Page):
  
     # Função que será chamada ao clicar no botão de login
     def on_login_click(e):
-        username = username_field.value
-        password = password_field.value
+        email = email_input.value
+        senha = senha_input.value
  
         # Aqui você pode manipular os dados, como autenticação ou exibir mensagem
-        print(f"Username: {username}, Password: {password}")
+        print(f"Username: {email}, Password: {senha}")
  
-        if username == "admin" and password == "12345":
+        # if username == "admin" and password == "12345":
+        #     info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
+        #     page.open(info)
+        #     sleep(1)
+        #     return page.go('/convidado')
+        # else:
+        #     info = ft.SnackBar(content=ft.Text("Email ou senha incorretos\!"), bgcolor=ft.colors.RED)
+        #     page.open(info)
+        # page.update()
+      
+
+        try:
+            convidado = Convidado.get(Convidado.email == email, Convidado.senha == senha)
+            page.session.set("convidado_id", convidado.id)
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
             page.open(info)
             sleep(1)
-            return page.go('/convidado')
-        else:
-            info = ft.SnackBar(content=ft.Text("Login inválido!"), bgcolor=ft.colors.RED)
+            page.go('/convidado')
+        except Convidado.DoesNotExist:
+            info = ft.SnackBar(content=ft.Text("Email ou senha incorretos\!"), bgcolor=ft.colors.RED)
             page.open(info)
         page.update()
  
     # Campos de entrada de dados (usuário e senha)
-    username_field = ft.TextField(label="Usuário")
-    password_field = ft.TextField(label="Senha", password=True)
+    email_input = ft.TextField(label="Email")
+    senha_input = ft.TextField(label="Senha", password=True)
  
     # Botão de login
     login_button = ft.Row([ft.ElevatedButton('Cadastra', on_click=lambda _: page.go('/cadastro')),
@@ -39,8 +53,8 @@ def validador(page: ft.Page):
             controls=[
                 
                 ft.Text("Tela de Login", theme_style="headlineMedium"),
-                username_field,
-                password_field,
+                email_input,
+                senha_input,
                 login_button,
             ],
         ),
