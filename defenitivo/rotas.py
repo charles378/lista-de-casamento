@@ -5,6 +5,8 @@ from casal import casall
 from convidado import Convidador
 from cadastro import cadastrar
 from databaze import Casal, Convidado
+from logintela import LoginPage
+from convi import Convidador
 
 
 # Função fictícia para buscar o nome do usuário no banco de dados
@@ -69,10 +71,10 @@ def main(page: ft.Page):
                   controls=[Home(page)],scroll=True)
         )
 
-        if page.route == "/validador_sanha":
+        if page.route == "/logintela":
             page.views.append(
                 ft.View(
-                    route="/validador_sanha", 
+                    route="/logintela", 
                     appbar=ft.AppBar(
                     title=ft.Text('Tela de login'),
                     bgcolor=ft.colors.SURFACE_VARIANT,
@@ -96,7 +98,7 @@ def main(page: ft.Page):
                         )
                     ]
                 ) , 
-                    controls=[validador(page)],
+                    controls=[LoginPage(page)],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     vertical_alignment=ft.MainAxisAlignment.CENTER
                     )
@@ -131,9 +133,9 @@ def main(page: ft.Page):
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER, scroll=True
                         )
             )
-        if page.route == "/convidado":
+        if page.route == "/convi":
             page.views.append(
-                ft.View(route="/convidado",
+                ft.View(route="/convi",
                         appbar=ft.AppBar(
                         title=ft.Text('Lista de presentes'),
                         bgcolor=ft.colors.SURFACE_VARIANT,

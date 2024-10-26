@@ -8,7 +8,7 @@ def LoginPage(page: ft.Page):
         try:
             convidado = Convidado.get(Convidado.email == email, Convidado.senha == senha)
             page.client_storage.set("convidado_id", convidado.id)
-            page.go("/convidador")
+            page.go("/convi")
         except Convidado.DoesNotExist:
             error_message.value = "Email ou senha incorretos"
             page.update()
