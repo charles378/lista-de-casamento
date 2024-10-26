@@ -1,5 +1,5 @@
 import flet as ft
-from home import Home
+from homee import Home
 from validador_sanha import validador
 from casal import casall
 from convidado import Convidador
@@ -46,10 +46,10 @@ def main(page: ft.Page):
                 appbar=ft.AppBar(
                     title=ft.Text('Tela inicial'),
                     bgcolor=ft.colors.SURFACE_VARIANT,
-                    toolbar_height=100,
+                    toolbar_height=60,
                     color=ft.colors.AMBER,
-                    leading=ft.Icon(ft.icons.HOME),
-                    leading_width=100,
+                    leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),
+                    leading_width=50,
                     actions=[
                         ft.IconButton(icon=ft.icons.SUNNY, 
                                     selected_icon=ft.icons.WB_SUNNY_OUTLINED, 
@@ -76,10 +76,10 @@ def main(page: ft.Page):
                     appbar=ft.AppBar(
                     title=ft.Text('Tela de login'),
                     bgcolor=ft.colors.SURFACE_VARIANT,
-                    toolbar_height=100,
+                    toolbar_height=60,
                     color=ft.colors.AMBER,
-                    leading=ft.Icon(ft.icons.HOME),
-                    leading_width=100,
+                    leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),
+                    leading_width=50,
                     actions=[
                         ft.IconButton(icon=ft.icons.SUNNY, 
                                     selected_icon=ft.icons.WB_SUNNY_OUTLINED, 
@@ -107,10 +107,10 @@ def main(page: ft.Page):
                         appbar=ft.AppBar(
                             title=ft.Text('Controle da Lista de precentes'),
                             bgcolor=ft.colors.SURFACE_VARIANT,
-                            toolbar_height=100,
+                            toolbar_height=60,
                             color=ft.colors.AMBER,
-                            leading=ft.Icon(ft.icons.HOME),
-                            leading_width=100,
+                            leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),
+                            leading_width=50,
                             actions=[
                                 ft.IconButton(icon=ft.icons.SUNNY, 
                                             selected_icon=ft.icons.WB_SUNNY_OUTLINED, 
@@ -137,10 +137,10 @@ def main(page: ft.Page):
                         appbar=ft.AppBar(
                         title=ft.Text('Lista de presentes'),
                         bgcolor=ft.colors.SURFACE_VARIANT,
-                        toolbar_height=100,
+                        toolbar_height=60,
                         color=ft.colors.AMBER,
-                        leading=ft.Icon(ft.icons.HOME),
-                        leading_width=100,
+                        leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),
+                        leading_width=50,
                         actions=[
                             ft.IconButton(icon=ft.icons.SUNNY, 
                                         selected_icon=ft.icons.WB_SUNNY_OUTLINED, 
@@ -167,10 +167,10 @@ def main(page: ft.Page):
                         appbar=ft.AppBar(
                         title=ft.Text('Lista de presentes'),
                         bgcolor=ft.colors.SURFACE_VARIANT,
-                        toolbar_height=100,
+                        toolbar_height=60,
                         color=ft.colors.AMBER,
-                        leading=ft.Icon(ft.icons.HOME),
-                        leading_width=100,
+                        leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),
+                        leading_width=50,
                         actions=[
                             ft.IconButton(icon=ft.icons.SUNNY, 
                                         selected_icon=ft.icons.WB_SUNNY_OUTLINED, 
