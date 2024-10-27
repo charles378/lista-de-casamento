@@ -126,7 +126,7 @@ def Home(page: ft.Page):
 
     page.overlay.append(file_picker)
     page.overlay.append(avatar_picker)
-    #page.add(avatar,layout)
+   # page.add(avatar,layout)
     return ft.Container(
         alignment=ft.alignment.center,
         content=ft.Column([

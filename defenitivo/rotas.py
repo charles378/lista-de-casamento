@@ -6,18 +6,19 @@ from convidado import Convidador
 from cadastro import cadastrar
 from databaze import Casal, Convidado
 from logintela import LoginPage
-#from convi import Convidador
+
 
 
 # Função fictícia para buscar o nome do usuário no banco de dados
 def get_user_name(page):
     convidado_id = page.session.get("convidado_id")
-    print(f'{convidado_id} home')
+    print(convidado_id)
     if not convidado_id:
         return None
     
     convidado = Convidado.get_or_none(Convidado.id == convidado_id)
     if convidado:
+        print(convidado.nome)
         return convidado.nome
     return None
 
