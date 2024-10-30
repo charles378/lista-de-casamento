@@ -149,7 +149,7 @@
 
 
 import flet as ft
-from databaze import Convidado
+from databaze import Convidado, Casal
 
 def validador(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER

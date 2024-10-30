@@ -5,7 +5,7 @@ def casall(page: ft.Page):
 
     if page.session.get("convidado_id"):
         convidado_id = page.session.get("convidado_id")
-        if convidado_id != 1:
+        if convidado_id != 0:
             page.go('/')
         return ft.SnackBar(content=ft.Text("Email ou senha incorretos!"), bgcolor=ft.colors.RED)
 
