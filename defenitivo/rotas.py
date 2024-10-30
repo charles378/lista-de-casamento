@@ -10,41 +10,63 @@ from validador_senha_dono import login
 
 
 
-# Função fictícia para buscar o nome do usuário no banco de dados
-def get_user_name(page):
+# Função para buscar o nome do usuário no banco de dados e retornar as iniciais
+def get_user_initials(page):
     convidado_id = page.session.get("convidado_id")
-    print(convidado_id)
+    print(f"Convidado ID: {convidado_id}")  # Adicione esta linha para depuração
     if not convidado_id:
-        return None
+        return "NN"  # Valor padrão caso o ID do convidado não seja encontrado
     
     convidado = Convidado.get_or_none(Convidado.id == convidado_id)
     if convidado:
-        print(convidado.nome)
-        return convidado.nome
-    return None
+        nome = convidado.nome
+        print(f"Nome do Convidado: {nome}")  # Adicione esta linha para depuração
+        # Pegar as duas primeiras letras do nome
+        iniciais = "".join([name[0] for name in nome.split()[:2]]).upper()
+        return iniciais
+    return "NN"  # Valor padrão caso o nome do convidado não seja encontrado
+
+# Função para buscar a cor de fundo do usuário no banco de dados
+def get_user_bgcolor(page):
+    convidado_id = page.session.get("convidado_id")
+    if not convidado_id:
+        return ft.colors.WHITE  # Valor padrão caso o ID do convidado não seja encontrado
+    
+    convidado = Convidado.get_or_none(Convidado.id == convidado_id)
+    if convidado and convidado.bgcolor:
+        return convidado.bgcolor
+    return ft.colors.WHITE  # Valor padrão caso a cor não seja encontrada
+
+# Função para salvar a cor de fundo do usuário no banco de dados
+def save_user_bgcolor(page, color):
+    convidado_id = page.session.get("convidado_id")
+    if convidado_id:
+        Convidado.update(bgcolor=color).where(Convidado.id == convidado_id).execute()
+
 
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     #page.theme_mode = ft.ThemeMode.SYSTEM
-    page.bgcolor = ft.colors.WHITE
+    #page.bgcolor = ft.colors.WHITE
 
-    user_name = get_user_name(page)
-    if user_name:
-        user_initials = "".join([name[0] for name in user_name.split()[:2]]).upper()
-    else:
-        user_initials = "NN"  # Valor padrão caso o nome do usuário não seja encontrado
+    user_initials = get_user_initials(page)
+    print(f"User initials: {user_initials}")  # Adicione esta linha para depuração
+
+    page.bgcolor = get_user_bgcolor(page)  # Usar a cor de fundo do usuário ao carregar a página
 
     def toggle_color(e):
         if page.bgcolor == ft.colors.BLACK:
             page.bgcolor = ft.colors.WHITE
         else:
             page.bgcolor = ft.colors.BLACK
+        save_user_bgcolor(page, page.bgcolor)  # Salvar a nova cor de fundo no banco de dados
         page.update()
+
 
     def show_user_data(e):
         # Função para buscar e mostrar os dados do usuário
-        user_data = get_user_name(page)  # Aqui você pode buscar mais dados do usuário
+        user_data = user_initials  # Aqui você pode buscar mais dados do usuário
         ft.dialog(title="Meus Dados", content=ft.Text(f"Nome: {user_data}")).show()
 
     def logout(e):
