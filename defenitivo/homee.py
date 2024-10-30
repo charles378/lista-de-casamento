@@ -98,7 +98,7 @@ def Home(page: ft.Page):
         offset=ft.Offset(x=1.3, y=0.1)
     )
     botao = ft.Row([
-        ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/casal')), 
+        ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/validador_senha_dono')), 
         ft.ElevatedButton('convidador', on_click=lambda _: page.go('/validador_sanha'))],
         alignment=ft.alignment.center,
         )

@@ -149,7 +149,7 @@
 
 
 import flet as ft
-from databaze import Convidado, Casal
+from databaze import Convidado
 
 def validador(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -158,16 +158,12 @@ def validador(page: ft.Page):
 
     # Verificar se o usuário já está logado
     if page.session.get("convidado_id"):
-        convidado_id = page.session.get("convidado_id")
-        if convidado_id == 1:
-            page.go('/casal')
-        else:
-            page.go('/convidado')
-        return
+        page.go('/convidado')
+        
 
     # Campos de entrada de dados (usuário e senha)
     email_input = ft.TextField(label="Email")
-    senha_input = ft.TextField(label="Senha", password=True)
+    senha_input = ft.TextField(label="Senha", password=True, can_reveal_password=True)
 
     # Função que será chamada ao clicar no botão de login
     def on_login_click(e):
@@ -179,9 +175,7 @@ def validador(page: ft.Page):
             page.session.set("convidado_id", convidado.id)
             info = ft.SnackBar(content=ft.Text("Login com sucesso!"), bgcolor=ft.colors.GREEN)
             page.open(info)
-            if convidado.id == 1:
-                page.go('/casal')
-            else:
+            if convidado.id:
                 page.go('/convidado')
         except Convidado.DoesNotExist:
             info = ft.SnackBar(content=ft.Text("Email ou senha incorretos!"), bgcolor=ft.colors.RED)

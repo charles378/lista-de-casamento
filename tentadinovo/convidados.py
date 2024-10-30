@@ -88,87 +88,87 @@ def main(page: ft.Page):
             update_task_list(results)
 
 ft.app(target=main)
-# import flet as ft
-# from databaze import Convidado, Presente
+import flet as ft
+from databaze import Convidado, Presente
 
 
-# def Convidador(page: ft.Page):
+def Convidador(page: ft.Page):
     
-#     def marcar_comprado(e, presente_id,id):
-#         convidado = Convidado.get_by_id(id)
-#         presente = Presente.get_by_id(presente_id)
-#         presente.compra = not presente.compra
-#         presente.convidado_id =  convidado.id # Aqui você pode definir o ID do convidado
-#         presente.save()
-#         caregar_presente()
+    def marcar_comprado(e, presente_id,id):
+        convidado = Convidado.get_by_id(id)
+        presente = Presente.get_by_id(presente_id)
+        presente.compra = not presente.compra
+        presente.convidado_id =  convidado.id # Aqui você pode definir o ID do convidado
+        presente.save()
+        caregar_presente()
     
-#     def caregar_presente():
-#         todos_presentes = Presente.select()
-#         concluidos_presentes = Presente.select().where(Presente.compra == True)
-#         incompletos_presentes = Presente.select().where(Presente.compra == False)
+    def caregar_presente():
+        todos_presentes = Presente.select()
+        concluidos_presentes = Presente.select().where(Presente.compra == True)
+        incompletos_presentes = Presente.select().where(Presente.compra == False)
 
-#         todos_list.controls.clear()
-#         concluidos_list.controls.clear()
-#         incompletos_list.controls.clear()
+        todos_list.controls.clear()
+        concluidos_list.controls.clear()
+        incompletos_list.controls.clear()
 
-#         for presente in todos_presentes:
-#             checkbox = ft.Checkbox(
-#                 label=f"Nome: {presente.nome}      Marca: {presente.marca}      Cor: {presente.cor}",
-#                 value=presente.compra,
-#                 on_change=lambda e, id=presente.id: marcar_comprado(e, id),
-#                 label_style=ft.TextStyle(color=ft.colors.AMBER)
-#             )
+        for presente in todos_presentes:
+            checkbox = ft.Checkbox(
+                label=f"Nome: {presente.nome}      Marca: {presente.marca}      Cor: {presente.cor}",
+                value=presente.compra,
+                on_change=lambda e, id=presente.id: marcar_comprado(e, id),
+                label_style=ft.TextStyle(color=ft.colors.AMBER)
+            )
             
-#             todos_list.controls.append(ft.Row([checkbox],scroll=True))
+            todos_list.controls.append(ft.Row([checkbox],scroll=True))
 
-#         for presente in concluidos_presentes:
-#             checkbox = ft.Checkbox(
-#                 label=f"Nome: {presente.nome} Marca: {presente.marca} Cor: {presente.cor}",
-#                 value=presente.compra,
-#                 on_change=lambda e, id=presente.id: marcar_comprado(e, id),
-#                 check_color=ft.colors.AMBER_200
-#             )
+        for presente in concluidos_presentes:
+            checkbox = ft.Checkbox(
+                label=f"Nome: {presente.nome} Marca: {presente.marca} Cor: {presente.cor}",
+                value=presente.compra,
+                on_change=lambda e, id=presente.id: marcar_comprado(e, id),
+                check_color=ft.colors.AMBER_200
+            )
             
-#             concluidos_list.controls.append(ft.Row([checkbox],scroll=True))
+            concluidos_list.controls.append(ft.Row([checkbox],scroll=True))
 
-#         for presente in incompletos_presentes:
-#             checkbox = ft.Checkbox(
-#                 label=f"Nome: {presente.nome} Marca: {presente.marca} Cor: {presente.cor}",
-#                 value=presente.compra,
-#                 on_change=lambda e, id=presente.id: marcar_comprado(e, id)
-#             )
+        for presente in incompletos_presentes:
+            checkbox = ft.Checkbox(
+                label=f"Nome: {presente.nome} Marca: {presente.marca} Cor: {presente.cor}",
+                value=presente.compra,
+                on_change=lambda e, id=presente.id: marcar_comprado(e, id)
+            )
             
-#             incompletos_list.controls.append(ft.Row([checkbox],scroll=True))
+            incompletos_list.controls.append(ft.Row([checkbox],scroll=True))
 
-#         page.update()
+        page.update()
 
-#     titulo = ft.Text('Lista de Presentes',  size=30, color= ft.colors.AMBER)
+    titulo = ft.Text('Lista de Presentes',  size=30, color= ft.colors.AMBER)
 
-#     todos_list = ft.Column(scroll=True)
-#     concluidos_list = ft.Column(scroll=True)
-#     incompletos_list = ft.Column(scroll=True)
-#     item_comprado = ft.Column()
+    todos_list = ft.Column(scroll=True)
+    concluidos_list = ft.Column(scroll=True)
+    incompletos_list = ft.Column(scroll=True)
+    item_comprado = ft.Column()
 
 
-#     tabs = ft.Tabs(
-#         selected_index=0,
-#         scrollable=True,
-#         tabs=[
-#             ft.Tab(text="Todos", content=todos_list),
-#             ft.Tab(text="Concluídos", content=concluidos_list),
-#             ft.Tab(text="Incompletos", content=incompletos_list),
-#             ft.Tab(text='Lista de convidados', content=item_comprado )
-#         ]
-#     )
+    tabs = ft.Tabs(
+        selected_index=0,
+        scrollable=True,
+        tabs=[
+            ft.Tab(text="Todos", content=todos_list),
+            ft.Tab(text="Concluídos", content=concluidos_list),
+            ft.Tab(text="Incompletos", content=incompletos_list),
+            ft.Tab(text='Lista de convidados', content=item_comprado )
+        ]
+    )
 
-#     caregar_presente()
-#     page.add( ft.Column(
-#             controls=[
-#                 titulo,
-#                 tabs
-#             ]
-#         ))
-# ft.app(Convidador)
+    caregar_presente()
+    page.add( ft.Column(
+            controls=[
+                titulo,
+                tabs
+            ]
+        ))
+ft.app(Convidador)
 
 # import flet as ft
 # from databaze import Convidado, Presente

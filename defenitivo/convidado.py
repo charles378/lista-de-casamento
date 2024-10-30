@@ -17,11 +17,6 @@ def Convidador(page: ft.Page):
         presente.convidado_id = convidado_id if presente.compra else None
         presente.save()
         caregar_presente()
-
-    def deletar_presente(e, presente_id):
-        presente = Presente.get_by_id(presente_id)
-        presente.delete_instance()
-        caregar_presente()
     
     def caregar_presente():
         todos_presentes = Presente.select()
