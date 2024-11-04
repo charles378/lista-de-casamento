@@ -7,6 +7,7 @@ from cadastro import cadastrar
 from cadastra_dono import cadastrar_dono
 from databaze import Casal, Convidado
 from validador_senha_dono import login
+from configue import onfique
 
 
 
@@ -192,6 +193,7 @@ def main(page: ft.Page):
                                     items=[
                                         ft.PopupMenuItem(text='Meu dados', on_click=show_user_data),
                                         ft.PopupMenuItem(text='Voltar a tela inicial', on_click=lambda _: page.go('/')),
+                                        ft.PopupMenuItem(text='onfiguração fotos', on_click=lambda _: page.go('/configue')),
                                         ft.PopupMenuItem(text='Sair', on_click=logout),
                                     ]
                                 )
@@ -293,6 +295,42 @@ def main(page: ft.Page):
                         scroll=True
                         )
             )
+        if page.route == "/configue":
+            page.views.append(
+                ft.View(
+                    route="/configue",
+                    appbar=ft.AppBar(
+                        title=ft.Text('Configuracao das fotos'),
+                        bgcolor=ft.colors.SURFACE_VARIANT,
+                        toolbar_height=60,
+                        color=ft.colors.AMBER,
+                        leading=ft.IconButton(ft.icons.HOME, on_click=lambda _: page.go('/')),
+                        leading_width=50,
+                        actions=[
+                            ft.IconButton(
+                                icon=ft.icons.SUNNY, 
+                                selected_icon=ft.icons.WB_SUNNY_OUTLINED, 
+                                selected=False,
+                                icon_color=ft.colors.WHITE, 
+                                on_click=toggle_color
+                            ),
+                            ft.CircleAvatar(content=ft.Text(user_initials)),
+                            ft.PopupMenuButton(
+                                items=[
+                                    ft.PopupMenuItem(text='Meu dados', on_click=show_user_data),
+                                    ft.PopupMenuItem(text='Voltar a tela inicial', on_click=lambda _: page.go('/')),
+                                    ft.PopupMenuItem(text='Sair', on_click=logout),
+                                ]
+                            )
+                        ]
+                    ),
+                    controls=[onfique(page)],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    vertical_alignment=ft.MainAxisAlignment.CENTER,
+                    scroll=True
+                )
+            )
+
         page.update()
 
     
