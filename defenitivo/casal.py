@@ -583,13 +583,11 @@ from databaze import Convidado, Presente, Casal
 def casall(page: ft.Page):
     # Verificar se o usuário logado é o dono
     dono_id = page.session.get("dono")
+    print(dono_id)
     if not dono_id:
         page.go("/login")
-        return
-    dono = Casal.get_or_none(Casal.id == dono_id)
-    if not dono:
-        page.go("/login")
-        return
+
+    
 
     def adicionar_presente(e):
         nome = nome_presente.value

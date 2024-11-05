@@ -97,7 +97,7 @@ def Home(page: ft.Page):
     def save_event_date(): 
         with open(EVENT_DATE_FILE, "w") as file: 
             json.dump(event_date_input.value, file) 
-    event_date_input = ft.TextField(label='Data do casamento', value=event_date, text_align=ft.CrossAxisAlignment.CENTER) 
+    event_date_input = ft.Text(event_date, ) 
     save_date_button = ft.ElevatedButton(text="Salvar Data", on_click=lambda _: save_event_date())
 
 
@@ -110,7 +110,7 @@ def Home(page: ft.Page):
         width=180,
         fit=ft.ImageFit.COVER,
         border_radius=ft.border_radius.all(120),
-        offset=ft.Offset(x=1.3, y=0.1)
+        #offset=ft.Offset(x=1.3, y=0.1)
     )
     botao = ft.Row([
         ft.ElevatedButton('Minha lista', on_click=lambda _: page.go('/validador_senha_dono')), 
@@ -119,7 +119,6 @@ def Home(page: ft.Page):
         )
     data_falta = ft.Container(
         content=event_date_input,
-        offset=ft.Offset(x=0.9, y=1.5),
           )
 
 
@@ -130,7 +129,7 @@ def Home(page: ft.Page):
         bgcolor=ft.colors.GREY_200,
         border_radius=ft.border_radius.all(10),
         padding=ft.padding.all(5),
-        offset=ft.Offset(x=0, y=0.2),
+        #offset=ft.Offset(x=0, y=0.2),
         content=ft.Column(
             controls=[
                 carousel,
@@ -144,20 +143,20 @@ def Home(page: ft.Page):
    # page.add(avatar,layout)
     return ft.Container(
         alignment=ft.alignment.center,
-        content=ft.Column([
+        content=ft.Column(alignment=ft.MainAxisAlignment.CENTER,horizontal_alignment=ft.CrossAxisAlignment.CENTER,controls=[
             avatar,
-            #data_falta,
+            ft.Text('Data do casamento'),
+            data_falta,
             ft.Container(
                 content=botao,             
-                alignment=ft.alignment.center,
+                #alignment=ft.alignment.center,
                 width=240,
                 bgcolor=ft.colors.WHITE12,
                 border_radius=50,
-                offset=ft.Offset(x=0.9, y=1.2)
+                #offset=ft.Offset(x=0.9, y=1.2)
               ),
             layout
            ],
-           alignment=ft.alignment.center,
         )
     )
 

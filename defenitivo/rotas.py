@@ -11,7 +11,7 @@ from configue import onfique
 
 
 
-# Função para buscar o nome do usuário no banco de dados e retornar as iniciais
+# Função para buscar o nome do usuário no banco de dados e retornar as iniciais  QXDxf_9DSNtb:D7
 def get_user_initials(page):
     convidado_id = page.session.get("convidado_id")
     print(f"Convidado ID: {convidado_id}")  # Adicione esta linha para depuração

@@ -7,7 +7,7 @@ def cadastrar_dono(page: ft.Page):
         if Casal.select().count() > 0:
             p = Casal.select()
             for f in p:
-                print(f.id,f.nome, f.senha)
+                print(f.id,f.nome, f.email, f.senha)
             info = ft.SnackBar(content=ft.Text("VOCÉ NÃO PODE SE CADASTRAR AQUI!"), bgcolor=ft.colors.RED)
             page.open(info)
             return
