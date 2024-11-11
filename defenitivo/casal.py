@@ -588,6 +588,10 @@ def casall(page: ft.Page):
         page.go("/login")
 
     
+    def delete_casal(cliente_id):
+            cliente = Casal.get(Casal.id == cliente_id)
+            cliente.delete_instance()
+            page.update()
 
     def adicionar_presente(e):
         nome = nome_presente.value
@@ -723,7 +727,8 @@ def casall(page: ft.Page):
             marca_presente,
             cor_presente,
             adicionar_button,
-            tabs
+            tabs,
+            delete_casal
         ]
     )
 
